@@ -10,30 +10,27 @@ bool promising(int i);
 
 /*global variable*/
 int col[LENGTH];
+int solcnt = 0;
 
 void main() {
-
 	int n;
-
-	while (true) {
 		scanf_s("%d", &n);
 		nQueens(0, n);
-	}
-
+		printf("%d", solcnt);
+		getchar();
+		getchar();
 }
 
 void nQueens(int i, int n) {
 
+	int j;
 	if (!promising(i)) return;
 	
 	if (i == n) {
-		for (int j=1; j <= n; j++) {
-			printf("%d", col[j]);
-		}
-		printf("\n");
+		solcnt++;
 	}
 	else {
-		for (int j = 1; j <= n; j++) {
+		for (j = 1; j <n+1; j++) {
 			col[i + 1] = j;
 			nQueens(i + 1, n);
 		}
@@ -42,11 +39,12 @@ void nQueens(int i, int n) {
 }
 
 bool promising(int i) {
-	
-	for (int j = 0; j < i; j++) {
-		if (col[i] == col[j] || abs(col[i] - col[j]) == i - j)
+	int k;
+	for (k = 1; k < i; k++) {
+		if (col[i] == col[k] || abs(col[i] - col[k]) == i - k )
 			return false;
-		return true;
 	}
-
+	return true;
 }
+
+
